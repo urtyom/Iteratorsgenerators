@@ -5,15 +5,20 @@ class FlatIterator:
 
   def __iter__(self):
     self.count = 0
+    self.count_l = -1
     self.list_of_list[self.count]
     return self
 
   def __next__(self):
-    if len(self.list_of_list[self.count]) == 0:
-      self.count += 1
-      if self.count == len(self.list_of_list):
+    if self.count_l < (len(self.list_of_list[self.count])-1):
+      self.count_l += 1
+    else:
+      self.count_l = 0
+      if self.count == (len(self.list_of_list)-1):
         raise StopIteration
-    return self.list_of_list[self.count].pop(0)
+      else:
+        self.count += 1
+    return self.list_of_list[self.count][self.count_l]
 
 
 def test_1():
